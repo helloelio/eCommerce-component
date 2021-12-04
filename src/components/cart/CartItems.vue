@@ -3,12 +3,7 @@
     <span class="empty-cart" v-if="this.cart.length === 0">
       Your cart is empty.
     </span>
-    <cart-item
-      v-else
-      v-for="(item, index) in this.cart"
-      :item="item"
-      :key="index"
-    />
+    <cart-item v-else v-for="item in this.cart" :item="item" :key="item.id" />
   </div>
 </template>
 

@@ -1,6 +1,6 @@
 <template>
   <div class="card__items shop__items">
-    <shop-item :item="item" v-for="(item, index) in this.menu" :key="index" />
+    <shop-item :item="item" v-for="item in this.menu" :key="item.id" />
   </div>
 </template>
 
