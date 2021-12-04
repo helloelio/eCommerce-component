@@ -5,7 +5,7 @@
         <div class="card shop">
           <div class="card__title">To Go Menu</div>
           <div class="card__items shop__items">
-            <div class="shop__item" v-for="item in menu" :key="item.id">
+            <div class="shop__item" v-for="(item, index) in menu" :key="index">
               <div>
                 <img class="shop__item-img" :src="item.img" alt="" />
               </div>
@@ -18,6 +18,7 @@
                   @click="addToCart(item)"
                   :disabled="item.added"
                 >
+                  <img v-if="item.added" src="./assets/check.svg" alt="" />
                   {{ item.added ? `In Cart` : 'Add to cart' }}
                 </button>
               </div>
@@ -30,10 +31,17 @@
             <span class="empty-cart" v-if="this.cart.length === 0">
               Your cart is empty.
             </span>
-            <div class="cart__item" v-else v-for="item in cart" :key="item.id">
+            <div
+              class="cart__item"
+              v-else
+              v-for="(item, index) in filteredCart"
+              :key="index"
+            >
               <div class="left-block">
                 <img class="cart__item-img" :src="item.img" alt="" />
-                <div class="cart__item-counter">{{ item.count }}</div>
+                <div class="cart__item-counter">
+                  {{ item.count }}
+                </div>
               </div>
               <div class="right-block">
                 <div class="cart__item-name">{{ item.name }}</div>
@@ -41,19 +49,25 @@
               </div>
               <div class="bottom-block">
                 <div class="count-interactive">
-                  <button class="arrow-button">
+                  <button class="arrow-button" @click="decCountItem(item)">
                     <img src="./assets/chevron.svg" alt="" />
                   </button>
                   <span>{{ item.count }}</span>
-                  <button class="arrow-button arrow-button-right">
+                  <button
+                    class="arrow-button arrow-button-right"
+                    @click="incCountItem(item)"
+                  >
                     <img src="./assets/chevron-right.svg" alt="" />
                   </button>
                 </div>
-                <div class="cost">${{ item.price }}</div>
+                <div class="cost">
+                  ${{ item.cost === 0 ? item.price : item.cost.toFixed(2) }}
+                </div>
               </div>
               <hr />
             </div>
           </div>
+          <div v-if="cart.length > 0" class="cart__total">123</div>
         </div>
       </div>
     </div>
@@ -66,11 +80,17 @@ import { mapGetters } from 'vuex';
 export default {
   name: 'App',
   computed: {
-    ...mapGetters(['cart', 'menu']),
+    ...mapGetters(['cart', 'menu', 'filteredCart']),
   },
   methods: {
     addToCart(item) {
       this.$store.commit('addToCart', item);
+    },
+    incCountItem(item) {
+      this.$store.commit('incCountItem', item);
+    },
+    decCountItem(item) {
+      this.$store.commit('decCountItem', item);
     },
   },
 };
@@ -149,9 +169,20 @@ hr {
       border-radius: 20px;
       padding: 4px 18px;
       border: none;
+      transition: 0.3s ease;
+    }
+    &-button:hover {
+      background-color: green;
     }
     &-button.active {
+      transition: 0.3s ease;
+      display: flex;
+      align-items: center;
       background-color: #000;
+      cursor: url('./assets/check-cursor.svg'), pointer;
+      img {
+        margin-right: 10px;
+      }
     }
   }
 }
@@ -247,5 +278,12 @@ hr {
   width: 32px;
   height: 32px;
   border-radius: 50%;
+  transition: 0.3s ease;
+}
+.arrow-button:hover {
+  background-color: red;
+}
+.arrow-button-right:hover {
+  background-color: green;
 }
 </style>
