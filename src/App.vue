@@ -12,8 +12,13 @@
               <div>
                 <div class="shop__item-name">{{ item.name }}</div>
                 <div class="shop__item-price">${{ item.price }}</div>
-                <button class="shop__item-button" @click="addToCart(item)">
-                  Add to cart
+                <button
+                  class="shop__item-button"
+                  :class="{ active: item.added }"
+                  @click="addToCart(item)"
+                  :disabled="item.added"
+                >
+                  {{ item.added ? `In Cart` : 'Add to cart' }}
                 </button>
               </div>
             </div>
@@ -39,13 +44,14 @@
                   <button class="arrow-button">
                     <img src="./assets/chevron.svg" alt="" />
                   </button>
-                  {{ item.count }}
+                  <span>{{ item.count }}</span>
                   <button class="arrow-button arrow-button-right">
                     <img src="./assets/chevron-right.svg" alt="" />
                   </button>
                 </div>
-                <div class="cost">${{ item.cost }}</div>
+                <div class="cost">${{ item.price }}</div>
               </div>
+              <hr />
             </div>
           </div>
         </div>
@@ -82,6 +88,11 @@ body {
 }
 button {
   cursor: pointer;
+}
+hr {
+  width: 100%;
+  background: #e5e5e5;
+  margin: 42px 0;
 }
 .main {
   background-image: url('./assets/background.png');
@@ -121,21 +132,48 @@ button {
     }
     &-price {
       padding: 20px 0 0 20px;
+      margin-bottom: 13px;
       font-weight: bold;
       font-size: 32px;
       line-height: 32px;
     }
     &-button {
+      display: block;
+      margin-bottom: -9px;
       color: #fff;
+      font-weight: bold;
+      font-size: 16px;
+      line-height: 24px;
       margin-left: 20px;
       background: #6b00f5;
       border-radius: 20px;
       padding: 4px 18px;
       border: none;
     }
+    &-button.active {
+      background-color: #000;
+    }
   }
 }
 .cart {
+  &__item {
+    .bottom-block {
+      margin-left: 64px;
+      .count-interactive {
+        display: flex;
+        align-items: center;
+        span {
+          margin: 0 10px;
+          font-weight: bold;
+          font-size: 16px;
+          line-height: 24px;
+        }
+      }
+    }
+  }
+  &__items {
+    padding-right: 37px;
+  }
   &__item {
     display: flex;
     flex-wrap: wrap;
