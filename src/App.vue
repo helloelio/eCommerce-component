@@ -115,6 +115,8 @@ hr {
     height: 100%;
   }
   .card {
+    background-image: url('./assets/background.png');
+    background-color: #eff0f6;
     border-radius: 0;
   }
   .shop {
