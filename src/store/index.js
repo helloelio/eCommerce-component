@@ -1,5 +1,5 @@
 import { createStore } from 'vuex';
-var _ = require('lodash');
+// var _ = require('lodash');
 import fries from '../assets/plate__fish-sticks-fries.png';
 import bacon from '../assets/plate__bacon-eggs.png';
 import chicken from '../assets/plate__fish-sticks-fries.png';
@@ -94,30 +94,18 @@ export default createStore({
       this.commit('getTotalPrice');
     },
     incCountItem(state, payload) {
-      this.commit('getTotalPrice');
-      state.cart.forEach((cartItem) => {
-        if (_.isEqual(cartItem, payload)) {
-          cartItem.count++;
-          cartItem.cost = cartItem.count * cartItem.price;
-        }
-      });
+      payload.count++;
     },
     decCountItem(state, payload) {
-      state.cart.forEach((cartItem) => {
-        if (_.isEqual(cartItem, payload)) {
-          cartItem.count--;
-          if (cartItem.count === 0) {
-            state.menu.forEach((menuItem) => {
-              if (cartItem.id === menuItem.id) {
-                menuItem.added = false;
-                cartItem.added = false;
-              }
-            });
-            state.cart.splice(cartItem.id, 1);
+      payload.count--;
+      if (payload.count === 0) {
+        state.menu.forEach((menuItem) => {
+          if (payload.id === menuItem.id) {
+            menuItem.added = false;
+            payload.added = false;
           }
-          cartItem.cost = cartItem.count * cartItem.price;
-        }
-      });
+        });
+      }
     },
     getTotalPrice(state) {
       state.cart.map((cartItem) => {
