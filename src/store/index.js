@@ -85,13 +85,13 @@ export default createStore({
   methods: {},
   mutations: {
     addToCart(state, payload) {
-      this.commit('getTotalPrice');
       state.cart.push({
         ...payload,
         cost: (payload.cost = payload.price),
         added: (payload.added = true),
         count: (payload.count = 1),
       });
+      this.commit('getTotalPrice');
     },
     incCountItem(state, payload) {
       this.commit('getTotalPrice');
