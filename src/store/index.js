@@ -81,6 +81,7 @@ export default createStore({
     menu: (state) => state.menu,
     filteredCart: (state) => state.cart.filter((item) => item.count !== 0),
     tax: (state) => state.tax,
+    totalPrice: (state) => state.totalPrice,
   },
   methods: {},
   mutations: {
@@ -112,8 +113,9 @@ export default createStore({
       this.commit('getTotalPrice');
     },
     getTotalPrice(state) {
-      state.cart.map((cartItem) => {
-        state.totalPrice += cartItem.cost;
+      state.totalPrice = 0;
+      this.getters.filteredCart.forEach((item) => {
+        state.totalPrice += item.cost;
       });
     },
   },
