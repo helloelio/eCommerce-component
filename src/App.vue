@@ -2,8 +2,17 @@
   <main class="main">
     <div class="container">
       <div class="content">
-        <the-shop :menu="menu" />
-        <the-cart :cart="filteredCart" />
+        <the-shop
+          @getShopStatus="handleClick"
+          :shopStatus="shopStatus"
+          :menu="menu"
+          :cart="filteredCart"
+        />
+        <the-cart
+          @getShopStatus="handleClick"
+          :shopStatus="shopStatus"
+          :cart="filteredCart"
+        />
       </div>
     </div>
   </main>
@@ -20,8 +29,22 @@ export default {
     TheShop,
     TheCart,
   },
+
+  data() {
+    return {
+      shopStatus: true,
+    };
+  },
+
   computed: {
     ...mapGetters(['cart', 'menu', 'filteredCart']),
+  },
+
+  methods: {
+    handleClick(payload) {
+      console.log('asd');
+      this.shopStatus = payload;
+    },
   },
 };
 </script>
@@ -72,11 +95,38 @@ hr {
     font-weight: bold;
     font-size: 32px;
     line-height: 48px;
-    padding: 50px 0 0 37px;
+    padding: 31px 0 0 37px;
     margin-bottom: 30px;
   }
   &__items {
     padding-left: 37px;
+  }
+}
+.button-to-back {
+  display: none;
+  margin: 20px 37px;
+}
+.button-to-cart {
+  display: none;
+}
+
+@media screen and (max-width: 768px) {
+  .shop {
+    position: relative;
+    z-index: 2;
+  }
+  .cart {
+    position: absolute;
+    z-index: 1;
+  }
+  .button-to-back {
+    display: block;
+  }
+  .button-to-cart {
+    display: block;
+  }
+  .not-active {
+    display: none;
   }
 }
 </style>

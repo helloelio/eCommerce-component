@@ -1,5 +1,11 @@
 <template>
-  <div class="card cart">
+  <div
+    class="card cart"
+    :class="[{ 'not-active': this.shopStatus }, { active: !this.shopStatus }]"
+  >
+    <button @click="handleClick" class="button-to-back">
+      <img src="../../assets/chevron-back.svg" />
+    </button>
     <div class="card__title">Your Cart</div>
     <cart-items :cart="this.cart" />
     <div v-if="cart.length > 0" class="cart__total">
@@ -19,9 +25,25 @@ export default {
     TotalCartCost,
   },
   props: {
+    shopStatus: {
+      type: Boolean,
+      default: true,
+    },
     cart: {
       type: Array,
       default: () => [],
+    },
+  },
+
+  data() {
+    return {
+      back: false,
+    };
+  },
+
+  methods: {
+    handleClick() {
+      this.$emit('getShopStatus', true);
     },
   },
 };
@@ -90,6 +112,7 @@ export default {
     }
   }
 }
+
 .empty-cart {
   font-size: 16px;
   line-height: 24px;
@@ -108,5 +131,9 @@ export default {
 }
 .arrow-button-right:hover {
   background-color: green;
+}
+.button-to-back {
+  background: none;
+  border: none;
 }
 </style>

@@ -1,5 +1,12 @@
 <template>
-  <div class="card shop">
+  <div
+    class="card shop"
+    :class="[{ 'not-active': !this.shopStatus }, { active: this.shopStatus }]"
+  >
+    <button @click="handleClick" class="button-to-cart">
+      <img src="../../assets/cart.svg" alt="" />
+      <div class="button-to-cart-count">{{ this.cart.length }}</div>
+    </button>
     <div class="card__title">To Go Menu</div>
     <shop-items :menu="this.menu" />
   </div>
@@ -14,9 +21,22 @@ export default {
     ShopItems,
   },
   props: {
+    shopStatus: {
+      type: Boolean,
+      default: true,
+    },
     menu: {
       type: Array,
       default: () => [],
+    },
+    cart: {
+      type: Array,
+      default: () => [],
+    },
+  },
+  methods: {
+    handleClick() {
+      this.$emit('getShopStatus', false);
     },
   },
 };
@@ -78,5 +98,21 @@ export default {
       }
     }
   }
+}
+.button-to-cart {
+  position: relative;
+  background: none;
+  border: none;
+  margin: 10px 0 0 37px;
+}
+.button-to-cart-count {
+  position: absolute;
+  top: -10px;
+  right: -10px;
+  background-color: orangered;
+  border-radius: 50%;
+  font-size: 28px;
+  width: 30px;
+  height: 30px;
 }
 </style>
