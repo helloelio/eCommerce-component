@@ -2,17 +2,21 @@
   <div class="card cart">
     <div class="card__title">Your Cart</div>
     <cart-items :cart="this.cart" />
-    <div v-if="cart.length > 0" class="cart__total">123</div>
+    <div v-if="cart.length > 0" class="cart__total">
+      <total-cart-cost :cart="this.cart" />
+    </div>
   </div>
 </template>
 
 <script>
 import CartItems from './CartItems.vue';
+import TotalCartCost from '@/components/cart/TotalCartCost.vue';
 
 export default {
   name: 'TheCart',
   components: {
     CartItems,
+    TotalCartCost,
   },
   props: {
     cart: {
