@@ -74,50 +74,57 @@ export default createStore({
     ],
     cart: [],
     totalPrice: 0,
+    tax: 0.0975,
   },
   getters: {
     cart: (state) => state.cart,
     menu: (state) => state.menu,
     filteredCart: (state) => state.cart.filter((item) => item.count + 1 !== 0),
+    tax: (state) => state.tax,
   },
   methods: {},
   mutations: {
     addToCart(state, payload) {
-      if (_.isEmpty(state.cart)) {
-        payload.added = true;
-        payload.count = 1;
-        state.cart.push(payload);
-      } else {
-        state.menu.find((item) => {
-          if (_.isEqual(payload, item)) {
-            payload.added = true;
-            payload.count = 1;
-            state.cart.push(payload);
-          }
-        });
-      }
+      // if (_.isEmpty(state.cart)) {
+      state.cart.push({
+        ...payload,
+        added: (payload.added = true),
+        count: (payload.count = 1),
+      });
+      // } else {
+      //   state.menu.forEach((item) => {
+      //     if (_.isEqual(payload, item)) {
+      //       state.cart.push({
+      //         ...payload,
+      //         added: (payload.added = true),
+      //         count: (payload.count = 1),
+      //       });
+      //     }
+      //   });
+      // }
     },
     incCountItem(state, payload) {
-      state.cart.forEach((item) => {
-        if (_.isEqual(item, payload)) {
-          item.count++;
-          item.cost = item.count * item.price;
+      state.cart.forEach((cartItem) => {
+        if (_.isEqual(cartItem, payload)) {
+          cartItem.count++;
+          cartItem.cost = cartItem.count * cartItem.price;
         }
       });
     },
     decCountItem(state, payload) {
-      state.cart.forEach((item) => {
-        if (item.count === 0) {
-          return;
-        } else {
-          if (_.isEqual(item, payload)) {
-            item.count--;
-            if (item.count === 0) {
-              item.added = false;
-              state.cart.splice(item.id - 1, 1);
-            }
-            item.cost = item.count * item.price;
+      state.cart.forEach((cartItem) => {
+        if (_.isEqual(cartItem, payload)) {
+          cartItem.count--;
+          if (cartItem.count === 0) {
+            state.menu.forEach((menuItem) => {
+              if (cartItem.id === menuItem.id) {
+                menuItem.added = false;
+              }
+            });
+            payload.added = false;
+            state.cart.splice(cartItem.id - 1, 1);
           }
+          cartItem.cost = cartItem.count * cartItem.price;
         }
       });
     },
