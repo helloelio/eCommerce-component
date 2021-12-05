@@ -3,15 +3,15 @@
     <div class="total">
       <div class="prices">
         <span class="total-title">Subtotal:</span>
-        <span class="total-price">20.12</span>
+        <span class="total-price">{{ this.total.toFixed(2) }}</span>
       </div>
       <div class="prices">
         <span class="total-title">Tax:</span>
-        <span class="total-price">{{ this.tax.toFixed(2) }}</span>
+        <span class="total-price">{{ getTaxes }}</span>
       </div>
       <div class="prices">
         <span class="total-title">Total:</span>
-        <span class="total-price purple">30.22</span>
+        <span class="total-price purple">{{ getTotalPrice }}</span>
       </div>
     </div>
   </div>
@@ -21,6 +21,11 @@
 import { mapGetters } from 'vuex';
 export default {
   name: 'TotalCartCost',
+  data() {
+    return {
+      total: 0,
+    };
+  },
   props: {
     cart: {
       type: Array,
@@ -28,6 +33,18 @@ export default {
     },
   },
   computed: {
+    getSubTotal() {
+      return this.cart.map((item) => {
+        return (this.total += item.cost).toFixed(2);
+      });
+    },
+
+    getTaxes() {
+      return this.tax.toFixed(2);
+    },
+    getTotalPrice() {
+      return (+this.total + +this.getTaxes).toFixed(2);
+    },
     ...mapGetters(['tax']),
   },
 };

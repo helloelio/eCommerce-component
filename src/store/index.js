@@ -12,7 +12,7 @@ export default createStore({
   state: {
     menu: [
       {
-        id: 1,
+        id: 0,
         img: fries,
         inCart: inCart,
         name: 'French Fries with Ketchup',
@@ -22,7 +22,7 @@ export default createStore({
         cost: 0,
       },
       {
-        id: 2,
+        id: 1,
         img: bacon,
         inCart: inCart,
         name: 'Salmon and Vegetables',
@@ -32,7 +32,7 @@ export default createStore({
         cost: 0,
       },
       {
-        id: 3,
+        id: 2,
         img: chicken,
         inCart: inCart,
         name: 'Spaghetti with Meat Sauce',
@@ -42,7 +42,7 @@ export default createStore({
         cost: 0,
       },
       {
-        id: 4,
+        id: 3,
         img: fish,
         inCart: inCart,
         name: 'French Fries with Ketchup',
@@ -52,7 +52,7 @@ export default createStore({
         cost: 0,
       },
       {
-        id: 5,
+        id: 4,
         img: ravioli,
         inCart: inCart,
         name: 'MMMM fisha ma GOD',
@@ -62,7 +62,7 @@ export default createStore({
         cost: 0,
       },
       {
-        id: 6,
+        id: 5,
         img: tortellini,
         inCart: inCart,
         name: 'pelmyashi SLABODA',
@@ -79,31 +79,22 @@ export default createStore({
   getters: {
     cart: (state) => state.cart,
     menu: (state) => state.menu,
-    filteredCart: (state) => state.cart.filter((item) => item.count + 1 !== 0),
+    filteredCart: (state) => state.cart.filter((item) => item.count !== 0),
     tax: (state) => state.tax,
   },
   methods: {},
   mutations: {
     addToCart(state, payload) {
-      // if (_.isEmpty(state.cart)) {
+      this.commit('getTotalPrice');
       state.cart.push({
         ...payload,
+        cost: (payload.cost = payload.price),
         added: (payload.added = true),
         count: (payload.count = 1),
       });
-      // } else {
-      //   state.menu.forEach((item) => {
-      //     if (_.isEqual(payload, item)) {
-      //       state.cart.push({
-      //         ...payload,
-      //         added: (payload.added = true),
-      //         count: (payload.count = 1),
-      //       });
-      //     }
-      //   });
-      // }
     },
     incCountItem(state, payload) {
+      this.commit('getTotalPrice');
       state.cart.forEach((cartItem) => {
         if (_.isEqual(cartItem, payload)) {
           cartItem.count++;
@@ -119,13 +110,18 @@ export default createStore({
             state.menu.forEach((menuItem) => {
               if (cartItem.id === menuItem.id) {
                 menuItem.added = false;
+                cartItem.added = false;
               }
             });
-            payload.added = false;
-            state.cart.splice(cartItem.id - 1, 1);
+            state.cart.splice(cartItem.id, 1);
           }
           cartItem.cost = cartItem.count * cartItem.price;
         }
+      });
+    },
+    getTotalPrice(state) {
+      state.cart.map((cartItem) => {
+        state.totalPrice += cartItem.cost;
       });
     },
   },
