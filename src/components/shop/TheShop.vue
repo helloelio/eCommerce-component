@@ -107,6 +107,9 @@ export default {
 }
 .button-to-cart-count {
   position: absolute;
+  display: flex;
+  justify-content: center;
+  align-items: center;
   top: -10px;
   right: -10px;
   background-color: orangered;

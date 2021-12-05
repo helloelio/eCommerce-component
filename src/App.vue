@@ -111,6 +111,12 @@ hr {
 }
 
 @media screen and (max-width: 768px) {
+  .main .content {
+    height: 100%;
+  }
+  .card {
+    border-radius: 0;
+  }
   .shop {
     position: relative;
     z-index: 2;
@@ -118,6 +124,7 @@ hr {
   .cart {
     position: absolute;
     z-index: 1;
+    top: 0;
   }
   .button-to-back {
     display: block;
