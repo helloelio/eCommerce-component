@@ -23,9 +23,7 @@
           <img src="../../assets/chevron-right.svg" alt="" />
         </button>
       </div>
-      <div class="cost">
-        ${{ item.cost === 0 ? item.price : item.cost.toFixed(2) }}
-      </div>
+      <div class="cost">${{ item.cost.toFixed(2) }}</div>
     </div>
     <hr />
   </div>
@@ -39,6 +37,12 @@ export default {
     item: {
       type: Object,
       default: () => {},
+    },
+  },
+
+  computed: {
+    itemCost() {
+      return (this.item.count * this.item.cost).toFixed(2);
     },
   },
 

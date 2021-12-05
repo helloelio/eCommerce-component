@@ -4,12 +4,17 @@
       Your cart is empty.
     </span>
     <transition-group name="list">
-      <cart-item v-for="item in this.cart" :item="item" :key="item.id" />
+      <cart-item
+        v-for="item in this.filteredCart"
+        :item="item"
+        :key="item.id"
+      />
     </transition-group>
   </div>
 </template>
 
 <script>
+import { mapGetters } from 'vuex';
 import CartItem from './CartItem.vue';
 
 export default {
@@ -22,6 +27,9 @@ export default {
       type: Array,
       default: () => [],
     },
+  },
+  computed: {
+    ...mapGetters(['filteredCart']),
   },
 };
 </script>

@@ -95,9 +95,12 @@ export default createStore({
     },
     incCountItem(state, payload) {
       payload.count++;
+      payload.cost = payload.count * payload.price;
+      this.commit('getTotalPrice');
     },
     decCountItem(state, payload) {
       payload.count--;
+      payload.cost = payload.cost - payload.price;
       if (payload.count === 0) {
         state.menu.forEach((menuItem) => {
           if (payload.id === menuItem.id) {
@@ -106,6 +109,7 @@ export default createStore({
           }
         });
       }
+      this.commit('getTotalPrice');
     },
     getTotalPrice(state) {
       state.cart.map((cartItem) => {
@@ -113,10 +117,6 @@ export default createStore({
       });
     },
   },
-  actions: {
-    addItemToCart(item) {
-      console.log(item);
-    },
-  },
+  actions: {},
   modules: {},
 });
