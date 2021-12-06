@@ -13,14 +13,14 @@
     <div class="bottom-block">
       <div class="count-interactive">
         <button class="arrow-button" @click="decCountItem(item)">
-          <img src="../../assets/chevron.svg" alt="" />
+          <img src="@/assets/chevron.svg" alt="" />
         </button>
         <span>{{ item.count }}</span>
         <button
           class="arrow-button arrow-button-right"
           @click="incCountItem(item)"
         >
-          <img src="../../assets/chevron-right.svg" alt="" />
+          <img src="@/assets/chevron-right.svg" alt="" />
         </button>
       </div>
       <div class="cost">${{ item.cost.toFixed(2) }}</div>

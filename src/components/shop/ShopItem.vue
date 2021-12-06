@@ -12,7 +12,7 @@
         @click="addToCart(item)"
         :disabled="item.added"
       >
-        <img v-if="item.added" src="../../assets/check.svg" alt="" />
+        <img v-if="item.added" src="@/assets/check.svg" alt="" />
         {{ item.added ? `In Cart` : 'Add to cart' }}
       </button>
     </div>

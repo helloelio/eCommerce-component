@@ -4,7 +4,7 @@
     :class="[{ 'not-active': !this.shopStatus }, { active: this.shopStatus }]"
   >
     <button @click="handleClick" class="button-to-cart">
-      <img src="../../assets/cart.svg" alt="" />
+      <img src="@/assets/cart.svg" alt="" />
       <div class="button-to-cart-count">{{ this.cart.length }}</div>
     </button>
     <div class="card__title">To Go Menu</div>

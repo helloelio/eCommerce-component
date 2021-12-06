@@ -4,7 +4,7 @@
     :class="[{ 'not-active': this.shopStatus }, { active: !this.shopStatus }]"
   >
     <button @click="handleClick" class="button-to-back">
-      <img src="../../assets/chevron-back.svg" />
+      <img src="@/assets/chevron-back.svg" />
     </button>
     <div class="card__title">Your Cart</div>
     <cart-items :cart="this.cart" />

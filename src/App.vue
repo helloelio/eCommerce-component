@@ -20,8 +20,8 @@
 
 <script>
 import { mapGetters } from 'vuex';
-import TheShop from './components/shop/TheShop.vue';
-import TheCart from './components/cart/TheCart.vue';
+import TheShop from '@/components/shop/TheShop.vue';
+import TheCart from '@/components/cart/TheCart.vue';
 
 export default {
   name: 'App',
