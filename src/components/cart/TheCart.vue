@@ -3,10 +3,11 @@
     class="card cart"
     :class="[{ 'not-active': this.shopStatus }, { active: !this.shopStatus }]"
   >
-    <button @click="handleClick" class="button-to-back">
-      <img src="@/assets/chevron-back.svg" />
-    </button>
-    <div class="card__title">Your Cart</div>
+    <div class="card__title">
+      <button @click="handleClick" class="button-to-back">
+        <img src="@/assets/chevron-back.svg" /></button
+      ><span>Your Cart</span>
+    </div>
     <cart-items :cart="this.cart" />
     <div v-if="cart.length > 0" class="cart__total">
       <total-cart-cost :cart="this.cart" />

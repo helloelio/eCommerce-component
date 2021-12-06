@@ -93,6 +93,8 @@ hr {
   box-shadow: 0px 0px 70px #c7cbe3;
   border-radius: 25px;
   &__title {
+    display: flex;
+    align-items: center;
     font-weight: bold;
     font-size: 32px;
     line-height: 48px;
@@ -105,7 +107,7 @@ hr {
 }
 .button-to-back {
   display: none;
-  margin: 20px 37px;
+  margin: 0px 20px 0 0;
 }
 .button-to-cart {
   display: none;
@@ -134,6 +136,11 @@ hr {
   }
   .button-to-cart {
     display: block;
+    border-radius: 50%;
+    padding: 8px;
+    justify-content: center;
+    align-items: center;
+    border: 1px solid;
   }
   .not-active {
     display: none;
