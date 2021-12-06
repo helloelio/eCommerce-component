@@ -1,5 +1,5 @@
 <template>
-  <div class="shop__item">
+  <div class="shop__item" :style="{ background: backgroundColor }">
     <div>
       <img class="shop__item-img" :src="item.img" alt="" />
     </div>
@@ -33,6 +33,13 @@ export default {
       default: () => {},
     },
   },
+
+  computed: {
+    backgroundColor() {
+      return '#' + Math.floor(Math.random() * 16777215).toString(16) + 31;
+    },
+  },
+
   methods: {
     addToCart(item) {
       this.$store.commit('addToCart', item);
