@@ -20,10 +20,12 @@ import TotalCartCost from '@/components/cart/TotalCartCost.vue';
 
 export default {
   name: 'TheCart',
+
   components: {
     CartItems,
     TotalCartCost,
   },
+
   props: {
     shopStatus: {
       type: Boolean,

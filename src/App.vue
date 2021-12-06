@@ -25,6 +25,7 @@ import TheCart from './components/cart/TheCart.vue';
 
 export default {
   name: 'App',
+
   components: {
     TheShop,
     TheCart,

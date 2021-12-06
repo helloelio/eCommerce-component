@@ -28,6 +28,7 @@ export default {
       default: () => [],
     },
   },
+
   computed: {
     getSubTotal() {
       return this.totalPrice.toFixed(2);

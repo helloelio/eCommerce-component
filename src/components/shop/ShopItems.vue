@@ -9,9 +9,11 @@ import ShopItem from './ShopItem.vue';
 
 export default {
   name: 'ShopItems',
+
   components: {
     ShopItem,
   },
+
   props: {
     menu: {
       type: Array,

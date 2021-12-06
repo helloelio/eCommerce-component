@@ -19,15 +19,18 @@ import CartItem from './CartItem.vue';
 
 export default {
   name: 'CartItems',
+
   components: {
     CartItem,
   },
+
   props: {
     cart: {
       type: Array,
       default: () => [],
     },
   },
+
   computed: {
     ...mapGetters(['filteredCart']),
   },

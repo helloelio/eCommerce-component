@@ -17,9 +17,11 @@ import ShopItems from './ShopItems.vue';
 
 export default {
   name: 'TheShop',
+
   components: {
     ShopItems,
   },
+
   props: {
     shopStatus: {
       type: Boolean,
@@ -34,6 +36,7 @@ export default {
       default: () => [],
     },
   },
+
   methods: {
     handleClick() {
       this.$emit('getShopStatus', false);
