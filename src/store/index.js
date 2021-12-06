@@ -1,5 +1,4 @@
 import { createStore } from 'vuex';
-// var _ = require('lodash');
 import fries from '../assets/plate__fish-sticks-fries.png';
 import bacon from '../assets/plate__bacon-eggs.png';
 import chicken from '../assets/plate__fish-sticks-fries.png';
