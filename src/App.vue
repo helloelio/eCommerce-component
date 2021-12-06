@@ -140,8 +140,9 @@ hr {
 }
 @media screen and (max-width: 580px) {
   .card {
+    height: 100%;
     width: 100%;
-    max-height: 100%;
+    max-height: 0;
   }
 }
 </style>
