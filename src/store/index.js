@@ -1,10 +1,10 @@
 import { createStore } from 'vuex';
-import fries from '../assets/plate__fish-sticks-fries.png';
-import bacon from '../assets/plate__bacon-eggs.png';
-import chicken from '../assets/plate__fish-sticks-fries.png';
-import fish from '../assets/plate__fish.png';
-import ravioli from '../assets/plate__ravioli.png';
-import tortellini from '../assets/plate__tortellini.png';
+import fries from '../assets/plate__fish-sticks-fries.webp';
+import bacon from '../assets/plate__bacon-eggs.webp';
+import chicken from '../assets/plate__fish-sticks-fries.webp';
+import fish from '../assets/plate__fish.webp';
+import ravioli from '../assets/plate__ravioli.webp';
+import tortellini from '../assets/plate__tortellini.webp';
 import inCart from '../assets/check.svg';
 
 export default createStore({
