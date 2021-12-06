@@ -100,10 +100,11 @@ export default {
   }
 }
 .button-to-cart {
-  position: relative;
+  position: fixed;
   background: none;
   border: none;
-  margin: 10px 0 0 37px;
+  top: 31px;
+  right: 37px;
 }
 .button-to-cart-count {
   position: absolute;
